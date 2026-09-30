@@ -323,7 +323,7 @@ button{font:inherit;color:inherit}
   opacity:0;transform:translateY(10px);transition:opacity .8s ease,transform .8s var(--ease);
 }
 .scroll-cue.show{opacity:1;transform:none}
-.scroll-cue span{padding:.55em 1.4em;border-radius:999px;background:rgba(12,10,50,.6);border:1px solid rgba(228,214,255,.28)}
+.scroll-cue span{padding:.55em 1.4em;border-radius:999px;background:rgba(12,10,50,.92);color:#fff;border:1px solid rgba(228,214,255,.28)}
 .scroll-cue i{width:1px;height:46px;background:linear-gradient(180deg,rgba(245,241,255,.95),transparent);transform-origin:top;animation:scrollLine 2.2s ease-in-out infinite}
 
 /* Okienko z całym tekstem karty (jedyne miejsce z rozmyciem tła — działa tylko chwilę) */
@@ -347,8 +347,9 @@ button{font:inherit;color:inherit}
 .cb-count{position:absolute;bottom:22px;left:0;right:0;text-align:center;pointer-events:none;color:rgba(245,241,255,.75);font-size:.85rem;letter-spacing:.2em}
 
 /* ═══════════ 3. GALERIA ═══════════ */
-.gallery{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:clamp(300px,40vw,520px);gap:20px}
-.shot{grid-column:span 6;min-height:0}
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,2vw,26px);padding-bottom:48px;align-items:start}
+.shot{min-height:0;aspect-ratio:3/4.2}
+.shot:nth-child(even){margin-top:48px!important}
 .shot-inner{
   position:relative;width:100%;height:100%;border-radius:24px;overflow:hidden;cursor:zoom-in;
   background:radial-gradient(circle at 30% 20%,#2f2488,transparent 62%),linear-gradient(145deg,#231a68,#0d0b34 62%,#1c1156);
@@ -439,13 +440,21 @@ button{font:inherit;color:inherit}
   animation:breathe 7s ease-in-out infinite;
 }
 .finale .container{width:fit-content;max-width:100%;padding:clamp(30px,5vw,60px) clamp(18px,5.5vw,76px)}
-.constellation{display:block;width:clamp(96px,15vw,140px);height:auto;margin:0 auto 22px;overflow:visible}
+.constellation{display:block;filter:drop-shadow(0 0 10px rgba(255,150,210,.55));width:clamp(130px,20vw,200px);height:auto;margin:0 auto 22px;overflow:visible}
 .constellation path{fill:none;stroke:rgba(255,214,234,.6);stroke-width:.8;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 3.4s ease .4s}
 .container.in .constellation path{stroke-dashoffset:0}
 .constellation .h{fill:rgba(255,166,207,.30)}
 .constellation .c{fill:#fff;animation:twinkle 3.4s ease-in-out infinite;animation-delay:calc(var(--i) * -.45s)}
-.finale-title{margin:0;font-family:var(--font-display);font-weight:300;font-size:clamp(2.6rem,8.6vw,6.8rem);line-height:1.08}
+.finale-title{margin:0;font-family:var(--font-display);font-weight:300;font-size:clamp(2.4rem,7vw,5.4rem);line-height:1.1}
 .finale-title .name{font-style:italic;color:#ffd6e8}
+.finale-again{margin-top:2em}
+.finale-again button{font:inherit;font-size:.9rem;letter-spacing:.14em;color:rgba(245,241,255,.8);background:rgba(12,10,50,.55);border:1px solid rgba(228,214,255,.3);border-radius:999px;padding:.7em 1.6em;cursor:pointer;transition:background .3s,border-color .3s}
+.finale-again button:hover{background:rgba(84,58,190,.8);border-color:rgba(255,190,225,.6)}
+.fin-hearts{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.fin-hearts i{position:absolute;bottom:-30px;left:var(--x);font-style:normal;font-size:var(--s);opacity:0;will-change:transform,opacity}
+.fin-on .fin-hearts i{animation:finUp var(--t) ease-out var(--dl) forwards}
+@keyframes finUp{0%{opacity:0;transform:translate3d(0,0,0) scale(.6)}15%{opacity:.85}100%{opacity:0;transform:translate3d(var(--dx),-88vh,0) scale(1.1)}}
+@media (prefers-reduced-motion:reduce){.fin-hearts{display:none}}
 .finale-sub{margin:1.8em auto 0;max-width:30em;font-family:var(--font-display);font-size:clamp(1.3rem,3vw,1.85rem);line-height:1.55;color:#ebe4ff}
 .finale-sign{margin:2.4em 0 0;font-family:var(--font-display);font-style:italic;font-size:clamp(1.5rem,3.4vw,2.1rem);color:#ffc7e0}
 
@@ -464,8 +473,9 @@ button{font:inherit;color:inherit}
 /* ═══════════ RESPONSYWNOŚĆ ═══════════ */
 @media (max-width:1000px){.cards{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:760px){
-  .gallery{grid-template-columns:1fr 1fr;grid-auto-rows:clamp(210px,62vw,340px);gap:12px}
-  .shot{grid-column:span 1}
+  .gallery{grid-template-columns:1fr 1fr;gap:12px;padding-bottom:0}
+  .shot:nth-child(even){margin-top:26px!important}
+  .shot:nth-child(odd){margin-top:0}
   .lb-prev{left:8px}.lb-next{right:8px}
   .lb-btn{width:44px;height:44px;margin-top:-22px}
   .lb-close{margin-top:0}
@@ -753,6 +763,7 @@ button{font:inherit;color:inherit}
        ═════════════════════════════════════════════════════════════════ -->
   <section class="finale" id="finale">
     <div class="finale-halo" aria-hidden="true"></div>
+    <div class="fin-hearts" aria-hidden="true"><i style="--x:5%;--s:14px;--t:6s;--dl:0.00s;--dx:40px">💜</i><i style="--x:11%;--s:21px;--t:6s;--dl:0.45s;--dx:-31px">💗</i><i style="--x:18%;--s:28px;--t:6s;--dl:0.90s;--dx:58px">💗</i><i style="--x:24%;--s:19px;--t:6s;--dl:1.35s;--dx:-13px">💜</i><i style="--x:30%;--s:26px;--t:6s;--dl:1.80s;--dx:46px">💗</i><i style="--x:36%;--s:17px;--t:6s;--dl:2.25s;--dx:-25px">💗</i><i style="--x:43%;--s:24px;--t:6s;--dl:2.70s;--dx:64px">💜</i><i style="--x:49%;--s:15px;--t:6s;--dl:3.15s;--dx:-37px">💗</i><i style="--x:55%;--s:22px;--t:6s;--dl:3.60s;--dx:52px">💗</i><i style="--x:62%;--s:29px;--t:6s;--dl:4.05s;--dx:-19px">💜</i><i style="--x:68%;--s:20px;--t:6s;--dl:4.50s;--dx:40px">💗</i><i style="--x:74%;--s:27px;--t:6s;--dl:4.95s;--dx:-31px">💗</i><i style="--x:81%;--s:18px;--t:6s;--dl:5.40s;--dx:58px">💜</i><i style="--x:87%;--s:25px;--t:6s;--dl:5.85s;--dx:-13px">💗</i><i style="--x:93%;--s:16px;--t:6s;--dl:6.30s;--dx:46px">💗</i></div>
     <div class="container reveal">
       <!-- Konstelacja w kształcie serca (rysuje się przy wejściu) -->
       <svg class="constellation" viewBox="0 0 100 88" aria-hidden="true">
@@ -769,6 +780,7 @@ button{font:inherit;color:inherit}
       <p class="finale-sub">Mam nadzieję, że ten dzień będzie dokładnie taki,<br>na jaki zasługujesz.</p>
       <!-- ✏️ TEKST: podpis na samym dole -->
       <p class="finale-sign">— Patryk Wysk ~twój uroczy piesek <span class="heart-glyph" aria-hidden="true">❤️</span></p>
+      <p class="finale-again"><button type="button" id="again">Przeczytaj jeszcze raz ↑</button></p>
     </div>
   </section>
 
@@ -1465,6 +1477,16 @@ secretBtn.addEventListener('click', () => {
   });
 })();
 
+})();
+
+/* Finał: lecące serduszka (raz) + „jeszcze raz” */
+(() => {
+  const f = document.getElementById('finale'), a = document.getElementById('again');
+  if (f && 'IntersectionObserver' in window) {
+    const o = new IntersectionObserver(es => { if (es[0].isIntersecting) { f.classList.add('fin-on'); o.disconnect(); } }, { threshold: .35 });
+    o.observe(f);
+  }
+  if (a) a.addEventListener('click', () => window.scrollTo({ top: 0, behavior: REDUCED ? 'auto' : 'smooth' }));
 })();
 </script>
 </body>
